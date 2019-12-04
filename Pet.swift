@@ -1,13 +1,5 @@
 import UIKit
 
-
-enum PetStates {
-    case hungry
-    case sleepy
-    case healthy
-}
-
-
 class Pet {
     enum State {
         case hungry
