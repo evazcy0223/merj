@@ -5,6 +5,7 @@ class Pet {
         case hungry
         case sleepy
         case healthy
+        case unhealthy
     }
     
     var state : State
@@ -71,21 +72,3 @@ class Pet {
     }
     
 }
-
-// making a checkpoint for Pet class
-let pet1 = Pet(name: "King", kind: "d")
-
-pet1.feedPet(numFood: 5)
-
-
-pet1.goToSleep(numSleep: 8)
-
-
-var somethingChanged : Bool
-somethingChanged = pet1.Update(time: 2)
-print(pet1.state, somethingChanged)
-somethingChanged = pet1.Update(time: 6)
-print(pet1.state, somethingChanged)
-somethingChanged = pet1.Update(time: 10)
-print(pet1.state, somethingChanged)
-
