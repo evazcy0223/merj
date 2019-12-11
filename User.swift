@@ -61,6 +61,8 @@ class User {
         }
     }
     
+    //func Shop()
+    
 }
 
 // Questions to ask
