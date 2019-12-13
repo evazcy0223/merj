@@ -1,8 +1,6 @@
 //
 //  SleepViewController.swift
 //  testingTesting
-//
-//  Created by Mariafernanda Hernandez on 12/4/19.
 //  Copyright © 2019 Pixel Pets. All rights reserved.
 //
 
