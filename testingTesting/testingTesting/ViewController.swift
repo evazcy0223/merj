@@ -1,8 +1,6 @@
 //
 //  ViewController.swift
 //  testingTesting
-//
-//  Created by Mariafernanda Hernandez on 12/3/19.
 //  Copyright © 2019 Mariafernanda Hernandez. All rights reserved.
 //
 
