@@ -1,8 +1,6 @@
 //
 //  StoreViewController.swift
 //  testingTesting
-//
-//  Created by Mariafernanda Hernandez on 12/4/19.
 //  Copyright © 2019 Mariafernanda Hernandez. All rights reserved.
 //
 
