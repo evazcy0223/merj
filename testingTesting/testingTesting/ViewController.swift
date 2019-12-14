@@ -8,20 +8,20 @@ import UIKit
 
 class ViewController: UIViewController{
     
-    var mainPet = Pet(name: "Oreo",kind: "s")
+    var mainPet = Pet(kind: "snake")
     
     @IBOutlet weak var healthLabel: UILabel?
     
     @IBOutlet weak var coinLabel: UILabel?
     
     func updatehealthLabel(){
-        healthLabel?.text = String(mainPet.health) + "/50"  //turns it into string
+        healthLabel?.text = String(UserDefaults.standard.integer(forKey: "hpKey")) + "/50"  //turns it into string
     }
     
     func updateCoinsLabel(){
-        coinLabel?.text = String(mainPet.budget) //turns it into string
+        coinLabel?.text = String(UserDefaults.standard.integer(forKey: "moneyKey")) //turns it into string
     }
-    
+
     //background image goes here
     let backgroundImageView = UIImageView()
     
@@ -30,10 +30,11 @@ class ViewController: UIViewController{
         // Do any additional setup after loading the view.
         //view.backgroundColor = UIColor.brown
         setBackground()
+        chaingingImage()
         
         updatehealthLabel()
         updateCoinsLabel()
-        chaingingImage()
+        
     }
     
     func setBackground(){   //Autolayout background
@@ -55,19 +56,22 @@ class ViewController: UIViewController{
     func chaingingImage(){
         
         //checking what kind of pet to show
+        var temp : String
+        temp = UserDefaults.standard.string(forKey: "typeKey") ?? "Unknown"
+        print(temp)
         
-        if (mainPet.kind == "s") //will likely need to write :::: presenter.mainPet.kind
+        if (temp == "snake") //will likely need to write :::: presenter.mainPet.kind
         {
         //show image of snake
         petImage.image = UIImage(named: "Pet3")
         
         }
-        else if (mainPet.kind == "p")
+        else if (temp == "penguin")
         {
         //show image of penguin
          petImage.image = UIImage(named: "Pet2")
         }
-        else
+        else if (temp == "cat")
         {
         //show cat
         petImage.image = UIImage(named: "Pet1")

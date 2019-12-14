@@ -30,26 +30,27 @@ class SleepViewController: UIViewController {
     @IBOutlet weak var petImage: UIImageView!
     
     func chaingingImage(){
-           //checking what kind of pet to show
-           
-        if let presenter = presentingViewController as? ViewController{
-        if (presenter.mainPet.kind == "s") //will likely need to write :::: presenter.mainPet.kind
-           {
-           //show image of snake
-           petImage.image = UIImage(named: "Pet3_sleep")
-           
-           }
-           else if (presenter.mainPet.kind == "p")
-           {
-           //show image of penguin
-            petImage.image = UIImage(named: "Pet2_sleep")
-           }
-           else
-           {
-           //show cat
-           petImage.image = UIImage(named: "Pet1_sleep")
-           }
-       }
+        //checking what kind of pet to show
+        var temp : String
+        temp = UserDefaults.standard.string(forKey: "typeKey") ?? "Unknown"
+        print(temp)
+                 
+        if (temp == "snake") //will likely need to write :::: presenter.mainPet.kind
+        {
+            //show image of snake
+            petImage.image = UIImage(named: "Pet3_eat")
+                 
+        }
+        else if (temp == "penguin")
+        {
+            //show image of penguin
+            petImage.image = UIImage(named: "Pet2_eat")
+        }
+        else if(temp == "cat")
+        {
+            //show cat
+            petImage.image = UIImage(named: "Pet1_eat")
+        }
     }
     
     override func viewDidLoad() {   //What happens when view loads
@@ -59,32 +60,27 @@ class SleepViewController: UIViewController {
             
         timeChange() //Function must be here to initialize label with time
         chaingingImage()
-        
     }
    
    @IBAction func timeScroller(sender: UIDatePicker){   //Sets time selected
         timeChange()
+        //timeScroller.layer.borderColor = UIColor.white
+        //sender.layer.borderWidth = 1
     }
    
     @IBAction func dismissViewController(_sender: UIButton) //Go! button
-        {
+    {
+            var tempHP : Int = UserDefaults.standard.integer(forKey: "hpKey")
+            
             if let presenter = presentingViewController as? ViewController
             {
-                
-                print(presenter.mainPet.sleepTime)  //should print 0
-                
-                presenter.mainPet.goToSleep(numSleep: sleepPicker.countDownDuration)
-                
                 if(numHours < 7.5){
-                    presenter.mainPet.health -= 20  //subtracts 20 HP
+                    tempHP -= 20
+                    UserDefaults.standard.set(tempHP, forKey: "hpKey")
+                    
                     presenter.updatehealthLabel()
-                    print(presenter.mainPet.health)
+                                 
                 }
-                
-                //presenter.mainPet.sleepTime = presenter.mainPet.sleepTime + sleepPicker.countDownDuration
-                print("from Sleep view after clicking Go!")
-                print(presenter.mainPet.sleepTime)
-                print(presenter.mainPet.state)
             }
             dismiss(animated: true, completion: nil)
     }//dismissViewController BUTTON

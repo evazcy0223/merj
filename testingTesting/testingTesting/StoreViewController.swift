@@ -31,40 +31,39 @@ class StoreViewController: UIViewController {
        }
 
         @IBAction func tryBuy(_sender: UIButton){
-        if let presenter = presentingViewController as? ViewController      //transfer data between main view and store view
-        {//just for ONE purchase
-                petBudget = presenter.mainPet.budget
+            if let presenter = presentingViewController as? ViewController      //transfer data between main view and store view
+            {//just for ONE purchase
+            
+                petBudget = UserDefaults.standard.integer(forKey: "moneyKey")
+                var tempHP : Int = UserDefaults.standard.integer(forKey: "hpKey")
 
-            //slider variable
-            if (petBudget >= (costMedicine * numBottles))  //checks if pet has enough coins
-            {
+                //slider variable
+                if (petBudget >= (costMedicine * numBottles))  //checks if pet has enough coins
+                {
                     //ONE medicine gives 5 HP back
-                    presenter.mainPet.health = presenter.mainPet.health + (5*numBottles) // 5 HP * thisPurchase (number of bottles purchased)
-                    presenter.mainPet.budget = presenter.mainPet.budget - (costMedicine * numBottles) //costMedicine(number purchased)
-        
+                    tempHP = tempHP + (5 * numBottles) // 5 HP * thisPurchase (number of bottles purchased)
+                     UserDefaults.standard.set(tempHP, forKey: "hpKey")
+                    
+                    petBudget = petBudget - (costMedicine * numBottles) //costMedicine(number purchased)
+                     UserDefaults.standard.set(petBudget, forKey: "moneyKey")
+                
                     //Pop up to confirm purchase
-                let alertController = UIAlertController(title: ("Are you sure you want to buy " + String(numBottles) + " bottles of medicine?"), message: nil, preferredStyle: UIAlertController.Style.alert)
+                    let alertController = UIAlertController(title: ("Are you sure you want to buy " + String(numBottles) + " bottle(s) of medicine?"), message: nil, preferredStyle: UIAlertController.Style.alert)
                 
-                alertController.addAction(UIAlertAction(title: "Yes!", style: UIAlertAction.Style.default, handler: nil))
-                present(alertController, animated: true, completion: nil)
+                    alertController.addAction(UIAlertAction(title: "Yes!", style: UIAlertAction.Style.default, handler: nil))
+                    present(alertController, animated: true, completion: nil)
                 
-                presenter.updateCoinsLabel()
-                presenter.updatehealthLabel()
+                    presenter.updateCoinsLabel()
+                    presenter.updatehealthLabel()
+                
                 }
-                
                 else{
                 //something that prints couldn't complete purchase to user
-                    let alertController = UIAlertController(title: ("You don't have enough coins to buy " + String(numBottles) + " bottles of medicine!"), message: nil, preferredStyle: UIAlertController.Style.alert)
+                    let alertController = UIAlertController(title: ("You don't have enough coins to buy " + String(numBottles) + " bottle(s) of medicine!"), message: nil, preferredStyle: UIAlertController.Style.alert)
                     
                     alertController.addAction(UIAlertAction(title: "Oh no!", style: UIAlertAction.Style.default, handler: nil))
                     present(alertController, animated: true, completion: nil)
-                    }
-            
-                print("from Store view")
-                print("health: ")
-                print(presenter.mainPet.health)
-                print("budget: ")
-                print(presenter.mainPet.budget)
+                }
             }
             
     }

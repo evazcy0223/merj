@@ -9,16 +9,16 @@ class Pet {
     }
     
     var state : State
-    var name : String
+    //var name : String
     var sleepTime : Double
     var foodEaten : Double  //Original : Int
-    var kind : Character
+    var kind : String
     var color : Character
     var health : Int
     var budget : Int
     
-    init(name: String, kind: Character) {
-        self.name = name
+    init(kind: String) {
+       // self.name = name
         self.kind = kind
         self.sleepTime = 0
         self.foodEaten = 0
